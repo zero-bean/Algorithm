@@ -14,7 +14,7 @@ int main() {
 		cin >> vec[i];
 	
 	for (int num : vec) {
-		if (num % 3 == 0)
+		if (num % 3 == 0 && num % 2 != 0)
 			cout << num << endl;
 	}
 
