@@ -7,7 +7,7 @@ int main() {
 
     cin >> n;
 
-    for (int i=1; n>=1; i++, count++) {
+    for (int i=1; n>1; i++, count++) {
         n /= i;
     }
 
