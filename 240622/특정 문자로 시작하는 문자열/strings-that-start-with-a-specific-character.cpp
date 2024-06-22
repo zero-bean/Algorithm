@@ -19,7 +19,7 @@ int main() {
     cin.get(c);
 
     for (string& s : vec) {
-        if (s[0] == 'c') {
+        if (s[0] == c) {
             avg += s.length();
             count++;
         }
