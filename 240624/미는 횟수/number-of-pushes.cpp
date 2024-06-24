@@ -6,6 +6,7 @@ using namespace std;
 
 void checkString(string(&str)[2]) {
     int count = 0;
+    bool check = false;
     
     if (str[0] == str[1]) {
         cout << 0;
@@ -19,11 +20,13 @@ void checkString(string(&str)[2]) {
 
         count++;
 
-        if (str[0] == str[1])
+        if (str[0] == str[1]) {
+            check = true;
             break;
+        }
     }
 
-    count == 0 ? cout << -1 : cout << count;
+    !check ? cout << -1 : cout << count;
 }
 
 int main() {
