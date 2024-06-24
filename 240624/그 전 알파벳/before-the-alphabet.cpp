@@ -7,7 +7,7 @@ int main() {
 
     cin.get(c);
 
-    c != 'z' ? c -= 1 : c = 'a';
+    c != 'a' ? c -= 1 : c = 'z';
 
     cout << c;
 
