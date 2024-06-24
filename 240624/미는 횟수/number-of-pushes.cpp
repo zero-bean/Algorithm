@@ -6,6 +6,11 @@ using namespace std;
 
 void checkString(string(&str)[2]) {
     int count = 0;
+
+        if (str[0] == str[1]) {
+        cout << 0;
+        return;
+    }
     
     for (int i = 0; i < str[1].size(); i++) {
         char c = str[1][0];
