@@ -10,25 +10,23 @@ void swap_data(int& a, int& b) {
 }
 
 int partition(vector<int>& v, int left, int right) {
-	int pivot = v[(left + right) / 2];
-	int change_Position = left - 1;
+	int pivot = v[right];
+	int change_Position = left;
 
-	for (int i = left; i <= right; i++) {
+	for (int i = left; i < right; i++) {
 		if (v[i] < pivot) {
-			change_Position++;
 			swap_data(v[i], v[change_Position]);
+			change_Position++;
 		}
 	}
 
-	swap_data(pivot, v[right]);
-
-	return change_Position + 1;
+	swap_data(v[change_Position], v[right]);
+	return change_Position;
 }
 
 void quick_Sort(vector<int>& v, int left, int right) {
 	if (left < right) {
 		int position = partition(v, left, right);
-
 		quick_Sort(v, left, position - 1);
 		quick_Sort(v, position + 1, right);
 	}
@@ -41,7 +39,6 @@ void print_Result(const vector<int>& v) {
 
 int main() {
 	int n;
-
 	cin >> n;
 
 	vector<int> vec(n);
