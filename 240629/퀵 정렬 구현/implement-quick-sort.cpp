@@ -1,5 +1,4 @@
 #include <iostream>
-#include <algorithm>
 #include <vector>
 
 using namespace std;
@@ -13,7 +12,7 @@ void swap_data(T& a, T& b) {
 
 template <typename T>
 int partition(vector<T>& v, int left, int right) {
-	T pivot = v[left];
+	T pivot = v[(left + right) / 2];
 	int change_Position = left - 1;
 
 	for (int i = left; i <= right; i++) {
