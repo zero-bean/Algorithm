@@ -20,7 +20,7 @@ int partition(vector<int>& v, int left, int right) {
 		}
 	}
 
-	swap_data(pivot, v[change_Position + 1]);
+	swap_data(pivot, v[right]);
 
 	return change_Position + 1;
 }
