@@ -3,16 +3,14 @@
 
 using namespace std;
 
-template <typename T>
-void swap_data(T& a, T& b) {
-	T tmp = a;
+void swap_data(int& a, int& b) {
+	int tmp = a;
 	a = b;
 	b = tmp;
 }
 
-template <typename T>
-int partition(vector<T>& v, int left, int right) {
-	T pivot = v[(left + right) / 2];
+int partition(vector<int>& v, int left, int right) {
+	int pivot = v[(left + right) / 2];
 	int change_Position = left - 1;
 
 	for (int i = left; i <= right; i++) {
@@ -27,8 +25,7 @@ int partition(vector<T>& v, int left, int right) {
 	return change_Position + 1;
 }
 
-template <typename T>
-void quick_Sort(vector<T>& v, int left, int right) {
+void quick_Sort(vector<int>& v, int left, int right) {
 	if (left < right) {
 		int position = partition(v, left, right);
 
@@ -37,9 +34,8 @@ void quick_Sort(vector<T>& v, int left, int right) {
 	}
 }
 
-template <typename T>
-void print_Result(const vector<T>& v) {
-	for (T t : v)
+void print_Result(const vector<int>& v) {
+	for (int t : v)
 		cout << t << " ";
 }
 
