@@ -5,21 +5,6 @@
 using namespace std;
 
 template <typename T>
-T select_Pivot(vector<T>& v, int left, int right) {
-	int size = right - left;
-	if (size >= 3) {
-		T data[3] = { v[left], v[(left + right) / 2], v[right] };
-		int smallest = min(data[0], min(data[1], data[2]));
-		int largest = max(data[0], max(data[1], data[2]));
-		int middle = data[0] + data[1] + data[2] - smallest - largest;
-		return middle;
-	}
-	else {
-		return v[left];
-	}
-}
-
-template <typename T>
 void swap_data(T& a, T& b) {
 	T tmp = a;
 	a = b;
@@ -28,24 +13,19 @@ void swap_data(T& a, T& b) {
 
 template <typename T>
 int partition(vector<T>& v, int left, int right) {
-	T pivot = select_Pivot(v, left, right);
-	int i = left;
-	int j = right;
+	T pivot = v[left];
+	int change_Position = left - 1;
 
-	while (i < j) {
-		while (v[j] > pivot && j >= left)
-			j--;
-
-		while (v[i] < pivot && i <= right)
-			i++;
-
-		if (i < j)
-			swap_data(v[i], v[j]);
-		else
-			swap_data(pivot, v[i]);
+	for (int i = left; i <= right; i++) {
+		if (v[i] < pivot) {
+			change_Position++;
+			swap_data(v[i], v[change_Position]);
+		}
 	}
 
-	return i;
+	swap_data(pivot, v[change_Position + 1]);
+
+	return change_Position + 1;
 }
 
 template <typename T>
