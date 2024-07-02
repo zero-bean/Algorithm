@@ -11,7 +11,7 @@ void swap_data(int& a, int& b) {
 
 void heapify(vector<int>& v, int parent, int n) {
 	int largest = parent;
-	int left = parent * 2;
+	int left = parent * 2 + 1;
 	int right = left + 1;
 
 	if (left < n && v[left] > v[largest])
