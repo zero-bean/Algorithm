@@ -34,7 +34,7 @@ void heap_Sort(vector<int>& v) {
 
 	for (int parent = size - 1; parent > 0; parent--) {
 		swap_data(v[0], v[parent]);
-		heapify(v, 0, parent - 1);
+		heapify(v, 0, parent);
 	}
 
 }
