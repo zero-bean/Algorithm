@@ -16,29 +16,17 @@ void merge(vector<int>& v, vector<int>& tmp, int left, int right) {
 	int k = left;
 
 	while (i <= mid && j <= right) {
-		if (v[i] <= v[j]) {
-			tmp[k] = v[i];
-			i++;
-		}
-		else {
-			tmp[k] = v[j];
-			j++;
-		}
-
-		k++;
+		if (v[i] <= v[j])
+			tmp[k++] = v[i++];
+		else
+			tmp[k++] = v[j++];
 	}
 
-	while (i <= mid) {
-		tmp[k] = v[i];
-		k++;
-		i++;
-	}
+	while (i <= mid)
+		tmp[k++] = v[i++];
 
-	while (j <= right) {
-		tmp[k] = v[j];
-		k++;
-		j++;
-	}
+	while (j <= right)
+		tmp[k++] = v[j++];
 
 	for (int l = left; l <= right; l++)
 		v[l] = tmp[l];
