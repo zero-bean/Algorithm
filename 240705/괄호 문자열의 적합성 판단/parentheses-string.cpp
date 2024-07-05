@@ -10,6 +10,11 @@ int main() {
 
     cin >> str;
 
+    if (str[0] == ')') {
+        cout << "No\n";
+        return 0;
+    }
+
     for (const char& c : str) {
         if (c == '(') {
             s.push(c);
