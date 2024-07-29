@@ -6,16 +6,16 @@ void brute_Force(const vector<vector<int>>& t) {
     int max = 0;
 
     for (int i = 0; i <= t.size() - 3; i++) {
-        int tmp = 0;
-
-        for (int j = i; j < i + 3; j++) {
-            for (int k = i; k < i + 3; k++) {
-                if (t[j][k] == 1)
-                    tmp++;
+        for (int j = 0; j <= t.size() - 3; j++) {
+            int tmp = 0;
+            for (int k = i; k <= i + 2; k++) {
+                for (int u = j; u <= i+2; u++) {
+                    if (t[k][u] == 1)
+                        tmp++;
+                }
             }
+            max = max < tmp ? tmp : max;
         }
-
-        max = (max > tmp ? max : tmp);
     }
 
     cout << max << endl;
