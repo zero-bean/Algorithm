@@ -11,9 +11,9 @@ void brute_Force(const vector<vector<int>>& t) {
             for (int k = j; k <= j + 2; k++) {
                 if (t[i][k] == 1)
                     tmp++;
-                if (t[i][k+1] == 1)
+                if (t[i+1][k] == 1)
                     tmp++;
-                if (t[i][k+2] == 1)
+                if (t[i+2][k] == 1)
                     tmp++;
             }
             max = max < tmp ? tmp : max;
