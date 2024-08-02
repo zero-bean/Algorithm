@@ -4,7 +4,7 @@
 using namespace std;
 
 void first_Check(const vector<vector<int>>& v, int& max, int n, int m) {
-    int dx[2][4] = { {-1, 1, 0, 0}, {0, 0, -1, 1} };
+    int dx[2][4] = { {-1, 1, 0, 0}, {0, 0, 1, -1} };
     int dy[2][4] = { {0, 0, -1, 1}, {-1, 1, 0, 0} };
 
     for (int i = 0; i < n; i++) {
