@@ -26,7 +26,7 @@ void recursive(vector<int> v, int pos, int k, int n) {
 int main() {
     int n, k;
 
-    cin >> n >> k;
+    cin >> k >> n;
 
     vector<int> v(n);
 
