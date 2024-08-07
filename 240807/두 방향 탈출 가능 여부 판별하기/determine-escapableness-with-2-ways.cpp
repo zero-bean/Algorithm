@@ -11,26 +11,26 @@ bool in_Range(pair<int, int> pos, pair<int, int> max) {
 }
 
 bool can_Go(const vector<vector<bool>>& v, pair<int, int> pos) {
-    if (!in_Range(pos, {v.size(), v[0].size()}))
+    if (!in_Range(pos, { v.size(), v[0].size() }))
         return false;
 
     if (!v[pos.first][pos.second])
         return false;
-    
+
     return true;
 }
 
 void dfs(vector<vector<bool>>& v, pair<int, int> pos) {
-    int dx[2] = {0, 1};
-    int dy[2] = {-1, 0};
+    int dx[2] = { 0, 1 };
+    int dy[2] = { -1, 0 };
 
-    for (int i=0; i<2; i++) {
+    for (int i = 0; i < 2; i++) {
         int nx = pos.first + dx[i];
         int ny = pos.second + dy[i];
 
-        if (can_Go(v, {nx, ny})) {
+        if (can_Go(v, { nx, ny })) {
             v[nx][ny] = false;
-            dfs(v, {nx, ny});
+            dfs(v, { nx, ny });
         }
     }
 }
@@ -42,14 +42,17 @@ int main() {
 
     vector<vector<bool>> grid(N, vector<bool>(M, false));
 
-    for (vector<bool>& v : grid) {
-        for (bool b : v)
-            cin >> b;
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < M; j++) {
+            int temp;
+            cin >> temp;  
+            grid[i][j] = (temp != 0);
+        }
     }
 
     grid[0][0] = false;
 
-    dfs(grid, {0, 0});
+    dfs(grid, { 0, 0 });
 
     cout << grid[N - 1][M - 1];
 
