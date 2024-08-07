@@ -14,7 +14,7 @@ bool can_Go(const vector<vector<bool>>& v, pair<int, int> pos) {
     if (!in_Range(pos, {v.size(), v[0].size()}))
         return false;
 
-    if (v[pos.first][pos.second])
+    if (!v[pos.first][pos.second])
         return false;
     
     return true;
@@ -29,7 +29,7 @@ void dfs(vector<vector<bool>>& v, pair<int, int> pos) {
         int ny = pos.second + dy[i];
 
         if (can_Go(v, {nx, ny})) {
-            v[nx][ny] = true;
+            v[nx][ny] = false;
             dfs(v, {nx, ny});
         }
     }
@@ -46,6 +46,8 @@ int main() {
         for (bool b : v)
             cin >> b;
     }
+
+    grid[0][0] = false;
 
     dfs(grid, {0, 0});
 
