@@ -22,7 +22,7 @@ bool can_Go(const vector<vector<bool>>& v, pair<int, int> pos) {
 
 void dfs(vector<vector<bool>>& v, pair<int, int> pos) {
     int dx[2] = { 0, 1 };
-    int dy[2] = { -1, 0 };
+    int dy[2] = { 1, 0 };
 
     for (int i = 0; i < 2; i++) {
         int nx = pos.first + dx[i];
@@ -46,15 +46,13 @@ int main() {
         for (int j = 0; j < M; j++) {
             int temp;
             cin >> temp;  
-            grid[i][j] = (temp != 0);
+            grid[i][j] = temp;
         }
     }
 
-    grid[0][0] = false;
-
     dfs(grid, { 0, 0 });
 
-    cout << grid[N - 1][M - 1];
+    cout << !grid[N - 1][M - 1];
 
     return 0;
 }
