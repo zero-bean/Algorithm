@@ -30,6 +30,7 @@ int main() {
         cin >> a >> b;
 
         graph[a].push_back(b);
+        graph[b].push_back(a);
     }
 
     dfs(graph, visited, 1, count);
