@@ -31,7 +31,7 @@ void dfs(vector<vector<bool>>& v, pair<int, int> pos, int& trial) {
 
 int main() {
     int N, M;
-    pair<int, int> answer = { 0, 0 };
+    pair<int, int> answer = { 0, -1 };
 
     cin >> N >> M;
 
