@@ -8,7 +8,7 @@ bool in_Range(int x, int y, pair<int, int> range) {
     return x >= 0 && x < range.first && y >= 0 && y < range.second;
 }
 
-void bfs(vector<vector<bool>>& grid) {
+void bfs(vector<vector<bool>>& grid, pair<int, int> range) {
     queue<pair<int, int>> q;
     int dx[4] = { -1,1,0,0 };
     int dy[4] = { 0,0,1,-1 };
@@ -25,7 +25,7 @@ void bfs(vector<vector<bool>>& grid) {
         for (int i = 0; i < 4; i++) {
             pair<int, int> next_Pos = { current_Pos.first + dx[i], current_Pos.second + dy[i] };
 
-            if (in_Range(next_Pos.first, next_Pos.second, { grid.size(), grid[0].size() }) && grid[next_Pos.first][next_Pos.second])
+            if (in_Range(next_Pos.first, next_Pos.second, range) && grid[next_Pos.first][next_Pos.second])
                 q.push(next_Pos);
         }
     }
@@ -48,7 +48,7 @@ int main() {
         }
     }
 
-    bfs(grid);
+    bfs(grid, { n, m });
 
     cout << !(grid[n - 1][m - 1]);
 
