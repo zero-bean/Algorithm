@@ -30,7 +30,7 @@ void dfs(vector<vector<bool>>& v, pair<int, int> pos, int& trial) {
 }
 
 int main() {
-    int N, M;
+    int N, M, maxHeight = 0;
     pair<int, int> answer = { 0, -1 };
 
     cin >> N >> M;
@@ -38,17 +38,20 @@ int main() {
     vector<vector<int>> houses(N, vector<int>(M));
 
     for (vector<int>& v : houses) {
-        for (int& i : v)
+        for (int& i : v) {
             cin >> i;
+
+            maxHeight = max(maxHeight, i);
+        }
     }
 
-    while (true) {
+    for (int k = 1; k <= maxHeight; k++) {
         vector<vector<bool>> check(N, vector<bool>(M, false));
         int area = 0;
 
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
-                if (houses[i][j] <= answer.first + 1)
+                if (houses[i][j] <= k)
                     check[i][j] = true;
             }
         }
@@ -65,7 +68,7 @@ int main() {
         }
 
         if (answer.second < area) {
-            answer.first++;
+            answer.first = k;
             answer.second = area;
         }
         else {
