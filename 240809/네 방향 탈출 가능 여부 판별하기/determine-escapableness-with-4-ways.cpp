@@ -4,7 +4,7 @@
 
 using namespace std;
 
-bool in_Range(int x, int y, pair<int, int> range) {
+bool in_Range(int& x, int& y, pair<int, int>& range) {
     return x >= 0 && x < range.first && y >= 0 && y < range.second;
 }
 
