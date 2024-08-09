@@ -71,11 +71,9 @@ int main() {
             answer.first = k;
             answer.second = area;
         }
-        else {
-            cout << answer.first << " " << answer.second;
-            break;
-        }
     }
+
+    cout << answer.first << " " << answer.second;
 
     return 0;
 }
