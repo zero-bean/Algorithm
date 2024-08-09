@@ -4,7 +4,7 @@
 
 using namespace std;
 
-bool in_Range(int& x, int& y, pair<int, int>& range) {
+bool in_Range(int x, int y, pair<int, int> range) {
     return x >= 0 && x < range.first && y >= 0 && y < range.second;
 }
 
@@ -14,19 +14,20 @@ void bfs(vector<vector<bool>>& grid, pair<int, int> range) {
     int dy[4] = { 0,0,1,-1 };
 
     q.push({ 0,0 });
+    grid[0][0] = false;
 
     while (!q.empty()) {
         pair<int, int> current_Pos = q.front();
         
         q.pop();
 
-        grid[current_Pos.first][current_Pos.second] = false;
-
         for (int i = 0; i < 4; i++) {
             pair<int, int> next_Pos = { current_Pos.first + dx[i], current_Pos.second + dy[i] };
 
-            if (in_Range(next_Pos.first, next_Pos.second, range) && grid[next_Pos.first][next_Pos.second])
+            if (in_Range(next_Pos.first, next_Pos.second, range) && grid[next_Pos.first][next_Pos.second]) {
+                grid[next_Pos.first][next_Pos.second] = false;
                 q.push(next_Pos);
+            }
         }
     }
 }
@@ -48,7 +49,7 @@ int main() {
         }
     }
 
-    bfs(grid, { n, m });
+    bfs(grid, {n, m});
 
     cout << !(grid[n - 1][m - 1]);
 
