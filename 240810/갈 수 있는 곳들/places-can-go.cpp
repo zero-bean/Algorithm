@@ -9,6 +9,9 @@ bool in_Range(int x, int y, int max) {
 }
 
 void bfs(vector<vector<bool>>& vec, pair<int, int> sp, int& ans) {
+    if (vec[sp.first][sp.second])
+        return;
+
     vec[sp.first][sp.second] = true;
     ans++;
 
