@@ -23,7 +23,7 @@ void select(const vector<pair<int, int>>& lines, vector<pair<int, int>>& tmp, in
 }
 
 void solve(const vector<pair<int, int>>& lines, vector<pair<int, int>>& ans) {
-    for (int i = 0; i < lines.size() - 1; i++) {
+    for (int i = 0; i < lines.size(); i++) {
         vector<pair<int, int>> tmp;
         tmp.push_back(lines[i]);
         select(lines, tmp, i + 1);
