@@ -52,7 +52,7 @@ bool is_The_Route(const vector<pair<int, int>>& ldr) { return find_Route(ldr) ==
 
 void generate_Combination(vector<pair<int, int>>& tmp, int idx, int& answer) {
     if (is_The_Route(tmp)) {
-        answer = min(tmp.size(), answer);
+        answer = min((int)tmp.size(), answer);
         return;
     }
 
