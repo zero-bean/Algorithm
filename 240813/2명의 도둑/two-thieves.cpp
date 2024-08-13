@@ -17,7 +17,7 @@ void generate_Combination(vector<pair<int, int>>& tmp, int row, int idx, int tot
     if (tmp.size() == m)
         return;
 
-    generate_Combination(tmp, row + 1, idx, tot);
+    //generate_Combination(tmp, row + 1, idx, tot);
     tmp.push_back({ row, idx });
     generate_Combination(tmp, row, idx + 1, tot + room[row][idx]);
     tmp.pop_back();
@@ -43,8 +43,8 @@ void solve() {
     vector<pair<int, int>> tmp;
     int answer = 0;
 
-    
-        generate_Combination(tmp, 0, 0, 0);
+    for (int i=0; i<n; i++)
+        generate_Combination(tmp, i, 0, 0);
 
     for (int i = 0; i < ways.size(); i++) {
         element[0] = ways[i];
