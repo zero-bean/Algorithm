@@ -36,20 +36,10 @@ vector<int> find_Route(const vector<pair<int, int>>& ldr) {
                 break;
             }
 
-            if (pos.first == 1) {
-                if (grid[pos.first][pos.second])
-                    pos.first++;
-            }
-            else if (pos.first == n) {
-                if (grid[pos.first - 1][pos.second])
-                    pos.first--;
-            }
-            else {
-                if (grid[pos.first][pos.second])
-                    pos.first++;
-                else if (grid[pos.first - 1][pos.second])
-                    pos.first--;
-            }
+            if (pos.first != n && grid[pos.first][pos.second])
+                pos.first++;
+            else if (pos.first != 1 && grid[pos.first - 1][pos.second])
+                pos.first--;
 
             pos.second++;
         }
@@ -61,13 +51,13 @@ vector<int> find_Route(const vector<pair<int, int>>& ldr) {
 bool is_The_Route(const vector<pair<int, int>>& ldr) { return find_Route(ldr) == origin_Route; }
 
 void generate_Combination(vector<pair<int, int>>& tmp, int idx, int& answer) {
-    if (idx >= m) 
-        return;
-
-    if (is_The_Route(tmp) && answer > tmp.size()) {
-        answer = tmp.size();
+    if (is_The_Route(tmp)) {
+        answer = min(tmp.size(), answer);
         return;
     }
+
+    if (idx >= m) 
+        return;
 
     tmp.push_back(ladders[idx]);
     generate_Combination(tmp, idx + 1, answer);
