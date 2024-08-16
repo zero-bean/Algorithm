@@ -27,7 +27,11 @@ void generate_Combination(int idx) {
 
 
     for (int i = 0; i < k; i++) {
-        if (dist[i] < m) {
+        if (dist[i] >= m) {
+            score = max(score, calculate_Score());
+            continue;
+        }
+        else {
             dist[i] += rush[idx];
             generate_Combination(idx + 1);
             dist[i] -= rush[idx];
