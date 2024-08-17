@@ -12,6 +12,9 @@ void find_Minimum_Jump(int idx, int cnt) {
         return;
     }
 
+    if (jump[idx] == 0)
+        return;
+
     for (int i=1; i<= jump[idx]; i++) {
         find_Minimum_Jump(idx + i, cnt + 1);
     }
@@ -20,7 +23,7 @@ void find_Minimum_Jump(int idx, int cnt) {
 void solve() {
     find_Minimum_Jump(0, 0);
 
-    answer = (answer == 100) ? 100 : answer;
+    answer = (answer == 100) ? -1 : answer;
 
     cout << answer;
 }
