@@ -12,9 +12,6 @@ void find_Minimum_Jump(int idx, int cnt) {
         return;
     }
 
-    if (jump[idx] == 0)
-        return;
-
     for (int i=1; i<= jump[idx]; i++) {
         find_Minimum_Jump(idx + i, cnt + 1);
     }
