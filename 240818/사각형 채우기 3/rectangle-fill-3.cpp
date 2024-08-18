@@ -1,24 +1,32 @@
 #include <iostream>
-#include <vector>
+
+#define MAX_N 1000
+#define MOD 1000000007
 
 using namespace std;
 
-vector<int> dp;
+// 변수 선언
 int n;
 
+long long dp[MAX_N + 1];
+
 int main() {
+    // 입력:
     cin >> n;
 
-    dp.resize(n+1);
+    // 초기 조건 설정
     dp[0] = 1;
     dp[1] = 2;
-    dp[2] = 7;
-    dp[3] = 22;
 
-    for (int i=4; i<=n; i++)
-        dp[i] = (dp[i-1] + dp[i-2] + dp[i-3] - 1) %  1000000007;
-
+    // 점화식에 따라 dp값 채우기
+    // dp[i] = dp[i - 1] * 2 + dp[i - 2] * 3 +
+    //         (dp[i - 3] + dp[i - 4] + dp[i - 5] + ... dp[0]) * 2
+    for(int i = 2; i <= n; i++) {
+        dp[i] = (dp[i - 1] * 2 + dp[i - 2] * 3) % MOD;
+        for(int j = i - 3; j >= 0; j--)
+            dp[i] = (dp[i] + dp[j] * 2) % MOD;
+    }
+    
     cout << dp[n];
-
     return 0;
 }
