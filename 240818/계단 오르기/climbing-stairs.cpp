@@ -10,7 +10,7 @@ int up_Stairs(int n) {
     if (n <= 3)
         return dp[n];
 
-    dp[n] = (up_Stairs(n - 2) + up_Stairs(n - 3)) % 10007;
+    dp[n] = (dp[up_Stairs(n - 2)] + dp[up_Stairs(n - 3)]) % 10007;
 
     return dp[n];
 }
