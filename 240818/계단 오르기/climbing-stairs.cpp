@@ -7,10 +7,10 @@ vector<int> dp;
 int n;
 
 int up_Stairs(int n) {
-    if (n <= 3)
-        return dp[n];
+    for (int i=4; i<=n; i++)
+        dp[i] = (dp[i-2] + dp[i-3]) % 10007;
 
-    return dp[n] = (up_Stairs(n - 2) + up_Stairs(n - 3)) % 10007;
+    return dp[n];
 }
 
 int main() {
