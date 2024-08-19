@@ -7,8 +7,8 @@ vector<vector<int>> grid;
 vector<vector<int>> v;
 int n, ans = 1;
 
-bool can_Go(int x, int y, int value, int v2) {
-    return (x >= 0 && x < n && y >= 0 && y < n) && (grid[x][y] > value) && v[x][y] < v2 + 1;
+bool can_Go(int x, int y) {
+    return (x >= 0 && x < n && y >= 0 && y < n);
 }
 
 void find_Max() {
@@ -21,7 +21,7 @@ void find_Max() {
                 int nx = k + dx[i];
                 int ny = j + dy[i];
 
-                if (can_Go(nx, ny, grid[k][j], v[k][j])) {
+                if (can_Go(nx, ny) && grid[nx][ny] > grid[k][j]) {
                     v[nx][ny] = max(1 + v[k][j], v[nx][ny]);
                     ans = max(ans, v[nx][ny]);
                 }
