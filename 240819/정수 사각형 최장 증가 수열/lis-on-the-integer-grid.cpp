@@ -11,27 +11,31 @@ bool can_Go(int x, int y, int value, int v2) {
     return (x >= 0 && x < n && y >= 0 && y < n) && (grid[x][y] > value) && v[x][y] < v2 + 1;
 }
 
-void find_Max(int x, int y) {
-    ans = max(ans, v[x][y]);
-
+void find_Max() {
     int dx[4] = { -1,1,0,0 };
     int dy[4] = { 0,0,1,-1 };
 
-    for (int i = 0; i < 4; i++) {
-        int nx = x + dx[i];
-        int ny = y + dy[i];
+    for (int k = 0; k < n; k++) {
+        for (int j = 0; j < n; j++) {
+            for (int i = 0; i < 4; i++) {
+                int nx = k + dx[i];
+                int ny = j + dy[i];
 
-        if (can_Go(nx, ny, grid[x][y], v[x][y])) {
-            v[nx][ny] = max(1 + v[x][y], v[x][y]);
-            find_Max(nx, ny);
+                if (can_Go(nx, ny, grid[k][j], v[k][j])) {
+                    v[nx][ny] = max(1 + v[k][j], v[k][j]);
+                    ans = max(ans, v[nx][ny]);
+                }
+            }
+
         }
     }
+
 }
 
-void solve(int x, int y) {
+void solve() {
     v.resize(n, vector<int>(n, 1));
 
-    find_Max(x, y);
+    find_Max();
 }
 
 int main() {
@@ -44,10 +48,7 @@ int main() {
             cin >> i;
     }
 
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++)
-            solve(i, j);
-    }
+    solve();
 
     cout << ans;
 
