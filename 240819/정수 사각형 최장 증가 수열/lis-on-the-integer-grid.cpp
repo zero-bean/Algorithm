@@ -22,7 +22,7 @@ void find_Max() {
                 int ny = j + dy[i];
 
                 if (can_Go(nx, ny, grid[k][j], v[k][j])) {
-                    v[nx][ny] = max(1 + v[k][j], v[k][j]);
+                    v[nx][ny] = max(1 + v[k][j], v[nx][ny]);
                     ans = max(ans, v[nx][ny]);
                 }
             }
