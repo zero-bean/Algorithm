@@ -4,13 +4,14 @@
 using namespace std;
 
 vector<vector<int>> grid;
+vector<vector<int>> v;
 int n, ans = 1;
 
-bool can_Go(int x, int y, int value) {
-    return (x >= 0 && x < n && y >= 0 && y < n) && (grid[x][y] > value);
+bool can_Go(int x, int y, int value, int v2) {
+    return (x >= 0 && x < n && y >= 0 && y < n) && (grid[x][y] > value) && v[x][y] < v2 + 1;
 }
 
-void find_Max(vector<vector<int>>& v, int x, int y) {
+void find_Max(int x, int y) {
     ans = max(ans, v[x][y]);
 
     int dx[4] = { -1,1,0,0 };
@@ -20,9 +21,9 @@ void find_Max(vector<vector<int>>& v, int x, int y) {
         int nx = x + dx[i];
         int ny = y + dy[i];
 
-        if (can_Go(nx, ny, grid[x][y])) {
-            v[nx][ny] = max(1 + v[x][y], v[nx][ny]);
-            find_Max(v, nx, ny);
+        if (can_Go(nx, ny, grid[x][y], v[x][y])) {
+            v[nx][ny] = max(1 + v[x][y], v[x][y]);
+            find_Max(nx, ny);
         }
     }
 }
@@ -30,7 +31,7 @@ void find_Max(vector<vector<int>>& v, int x, int y) {
 void solve(int x, int y) {
     vector<vector<int>> dp(n, vector<int>(n, 1));
 
-    find_Max(dp, x, y);
+    find_Max(x, y);
 }
 
 int main() {
