@@ -29,7 +29,7 @@ void find_Max(int x, int y) {
 }
 
 void solve(int x, int y) {
-    vector<vector<int>> dp(n, vector<int>(n, 1));
+    v.resize(n, vector<int>(n, 1));
 
     find_Max(x, y);
 }
