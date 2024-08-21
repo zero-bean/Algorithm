@@ -23,9 +23,6 @@ void bfs() {
         int curr = q.front();
         q.pop();
 
-        if (curr == k)
-            break;
-
         if (visited[curr])
             continue;
 
