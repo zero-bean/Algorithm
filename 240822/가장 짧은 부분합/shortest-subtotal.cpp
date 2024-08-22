@@ -22,7 +22,8 @@ int main() {
             j++;
         }
         
-        ans = min(ans, j - i + 1);
+        if (sum >= s)
+            ans = min(ans, j - i);
 
         sum -= vec[i];
     }
