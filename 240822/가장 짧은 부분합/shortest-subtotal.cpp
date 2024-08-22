@@ -1,35 +1,36 @@
 #include <iostream>
+#include <limits>
 #include <vector>
 
 using namespace std;
 
 int main() {
     vector<int> vec;
-    int n, s;
-    int ans = 10000000;
+    int n, s, sum = 0;
+    int j = 0;
+    int ans = numeric_limits<int>::max();
 
     cin >> n >> s;
 
     vec.resize(n);
-    for(int& i : vec)
+    for (int& i : vec)
         cin >> i;
 
-    for (int i=0; i<n; i++) {
-        int tmp = 0;
-        int cnt = 1;
-
-        for (int j=i; j<n; j++) {
-            if (tmp + vec[j] >= s) {
-                ans = min(ans, cnt);
-                break;
-            }
-
-            tmp += vec[j];
-            cnt++;
+    for (int i = 0; i < n; i++) {
+        while (j < n && sum < s) {
+            sum += vec[j];
+            j++;
         }
+        
+        ans = min(ans, j - i + 1);
+
+        sum -= vec[i];
     }
 
-    cout << ans;
+    if (ans == numeric_limits<int>::max())
+        cout << -1;
+    else
+        cout << ans;
 
     return 0;
 }
