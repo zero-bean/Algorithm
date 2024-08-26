@@ -3,7 +3,7 @@
 #include <queue>
 #include <vector>
 
-#define MAX 1'000'000
+#define MAX 1'000'000'000
 
 using namespace std;
 
@@ -26,9 +26,9 @@ vector<vector<graph>> graphs;
 pair<int, int> target;
 int N, E;
 
-vector<ll> dijkstra(int start) {
+vector<int> dijkstra(int start) {
     priority_queue<pair<int, int>, vector<pair<int, int>>, compare_Graphs> q;
-    vector<ll> dist(N + 1, MAX);
+    vector<int> dist(N + 1, MAX);
     vector<bool> visited(N + 1, false);
     
     dist[start] = 0;
@@ -55,10 +55,10 @@ vector<ll> dijkstra(int start) {
 }
 
 void solve() {
-    vector<ll> dist_start = dijkstra(1);
-    vector<ll> dist_first = dijkstra(target.first);
-    vector<ll> dist_second = dijkstra(target.second);
-    ll ans[2];
+    vector<int> dist_start = dijkstra(1);
+    vector<int> dist_first = dijkstra(target.first);
+    vector<int> dist_second = dijkstra(target.second);
+    int ans[2];
 
     if (dist_start[target.first] == MAX || dist_first[target.second] == MAX || dist_second[N] == MAX ||
         dist_start[target.second] == MAX || dist_second[target.first] == MAX || dist_first[N] == MAX) {
