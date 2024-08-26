@@ -3,7 +3,7 @@
 #include <queue>
 #include <vector>
 
-#define MAX 1'000'000'000
+#define MAX 1'000'000
 
 using namespace std;
 
