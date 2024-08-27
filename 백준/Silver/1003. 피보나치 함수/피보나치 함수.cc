@@ -3,9 +3,7 @@
 
 using namespace std;
 
-typedef long long ll;
-
-void solve(vector<vector<ll>>& dp, int n) {
+void solve(vector<vector<int>>& dp, int n) {
     if (n == 0) {
         cout << "1 0" << endl;
         return;
@@ -40,7 +38,7 @@ int main() {
 
         cin >> N;
 
-        vector<vector<ll>> dp(2, vector<ll>(N + 1));
+        vector<vector<int>> dp(2, vector<int>(N + 1));
 
         solve(dp, N);
     }
