@@ -24,12 +24,15 @@ void solve() {
     }
     
     if (ans == 100'000)
-        cout << 0 << endl;
+        cout << 0 << "\n";
     else
-        cout << ans << endl;
+        cout << ans << "\n";
 }
 
 int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    
     cin >> n >> m;
 
     arr.resize(n);
