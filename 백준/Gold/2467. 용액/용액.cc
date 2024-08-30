@@ -1,38 +1,46 @@
 #include <iostream>
 #include <vector>
-#include <cmath>
-#include <limits.h>
 
 using namespace std;
 
-int main() {
-    int n;
-    cin >> n;
-    vector<int> arr(n);
-    for (int i = 0; i < n; i++)
-        cin >> arr[i];
+pair<int, int> p;
+vector<int> arr;
+int n, ans = 2'000'000'000;
 
-    int left = 0;
+void binary_Search() {
+    int left = 0; 
     int right = n - 1;
-    int min_gap = INT_MAX;
-    pair<int, int> ans;
 
     while (left < right) {
+        int mid = (left + right) / 2;
         int sum = arr[left] + arr[right];
-        int gap = abs(sum);
 
-        if (gap < min_gap) {
-            min_gap = gap;
-            ans = { arr[left], arr[right] };
+        if (ans >= abs(sum)) {
+            ans = abs(sum);
+            p = { arr[left], arr[right] };
         }
 
-        if (sum < 0) {
+        if (sum < 0)
             left++;
-        } else {
+        else
             right--;
-        }
     }
+}
 
-    cout << ans.first << " " << ans.second << endl;
+void solve() {
+    binary_Search();
+
+    cout << p.first << " " << p.second << "\n";
+}
+
+int main() {
+    cin >> n;
+
+    arr.resize(n);
+    for (int& i : arr)
+        cin >> i;
+
+    solve();
+
     return 0;
 }
