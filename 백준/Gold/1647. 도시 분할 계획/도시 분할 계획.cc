@@ -33,7 +33,7 @@ void union_Element(vector<int>& group, int a, int b) {
 	rootA < rootB ? group[rootB] = rootA : group[rootA] = rootB;
 }
 
-vector<graph> kruskal() {
+vector<graph> kruskal(int& tot) {
 	vector<graph> tmp;
 	vector<int> group(n + 1);
 
@@ -49,6 +49,7 @@ vector<graph> kruskal() {
 
 		if (houseA != houseB) {
 			union_Element(group, g.sp, g.lp);
+			tot += g.weight;
 			tmp.push_back(g);
 		}
 	}
@@ -61,12 +62,8 @@ bool sort_Graph(const graph& g1, const graph& g2) { return g1.weight < g2.weight
 void solve() {
 	sort(graphs.begin(), graphs.end(), sort_Graph);
 	
-	vector<graph> ans = kruskal();
-	int lowCost = numeric_limits<int>::max();
-	int tot = 0;
-
-	for (const graph& g : ans)
-		tot += g.weight;
+	int tot = 0, lowCost = numeric_limits<int>::max();
+	vector<graph> ans = kruskal(tot);
 
 	for (int i = 0; i < ans.size(); i++)
 		lowCost = min(lowCost, tot - ans[i].weight);
