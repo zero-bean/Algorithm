@@ -16,7 +16,7 @@ int n, m;
 
 int find_Parent(vector<int>& group, int a) {
 	if (group[a] != a)
-		return find_Parent(group, group[a]);
+		group[a] = find_Parent(group, group[a]);
 
 	return group[a];
 }
@@ -55,10 +55,7 @@ void solve() {
 		union_Elements(group, vertexA, vertexB);
 	}
 
-	if (!check)
-		cout << cnt << endl;
-	else
-		cout << 0 << endl;
+	!check ? cout << cnt << endl : cout << 0 << endl;
 }
 
 int main() {
