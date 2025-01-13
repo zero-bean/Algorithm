@@ -5,7 +5,6 @@ using namespace std;
 
 vector<vector<int>> board(9, vector<int>(9, 0));
 vector<pair<int, int>> blanks;
-bool isEnd = false;
 
 bool Check_Area(const pair<int, int> p, const int value) {
     int row = p.first;
@@ -28,20 +27,15 @@ bool Check_Area(const pair<int, int> p, const int value) {
     return true;
 }
 
-
-void Solve(int idx) {
-    if (isEnd)
-        return;
-
-    if (idx >= blanks.size()) {
+bool Solve(int idx) {
+    if (idx == blanks.size()) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++)
                 cout << board[i][j] << " ";
             cout << endl;
         }
 
-        isEnd = true;
-        return;
+        return true;
     }
 
     pair<int, int> blank = blanks[idx];
@@ -51,9 +45,14 @@ void Solve(int idx) {
             continue;
 
         board[blank.first][blank.second] = i;
-        Solve(idx + 1);
+
+        if (Solve(idx + 1))
+            return true;
+
         board[blank.first][blank.second] = 0;
     }
+
+    return false;
 }
 
 int main() {
@@ -63,9 +62,8 @@ int main() {
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < 9; j++) {
             cin >> board[i][j];
-
             if (board[i][j] == 0)
-                blanks.push_back({ i,j });
+                blanks.push_back({ i, j });
         }
     }
 
