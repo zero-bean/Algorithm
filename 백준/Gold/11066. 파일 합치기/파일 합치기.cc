@@ -4,7 +4,10 @@
 
 using namespace std;
 
-int Solve(vector<vector<int>>& dp, const vector<int>& files, int start, int end) {
+vector<vector<int>> dp;
+vector<int> files;
+
+int Solve(int start, int end) {
     if (dp[start][end] != numeric_limits<int>::max())
         return dp[start][end];
 
@@ -15,8 +18,8 @@ int Solve(vector<vector<int>>& dp, const vector<int>& files, int start, int end)
         return dp[start][end] = files[start] + files[end];
 
     for (int mid = start; mid < end; mid++) {
-        int left = Solve(dp, files, start, mid);
-        int right = Solve(dp, files, mid + 1, end);
+        int left = Solve(start, mid);
+        int right = Solve(mid + 1, end);
         dp[start][end] = min(dp[start][end], left + right);
     }
 
@@ -31,14 +34,12 @@ int main() {
     cin >> T;
 
     while (T--) {
-        vector<vector<int>> dp;
-        vector<int> files;
         int K;
 
         cin >> K;
             
-        files.resize(K + 1);
-        dp.resize(K + 1, vector<int>(K + 1, numeric_limits<int>::max()));
+        files = vector<int>(K + 1);
+        dp = vector<vector<int>>(K + 1, vector<int>(K + 1, numeric_limits<int>::max()));
         dp[0][0] = 0;
 
         for (int i = 1; i <= K; i++) {
@@ -46,9 +47,8 @@ int main() {
             dp[0][i] = dp[0][i - 1] + files[i];
         }
 
-        cout << Solve(dp, files, 1, K) << endl;
+        cout << Solve(1, K) << endl;
     }
-
 
     return 0;
 }
