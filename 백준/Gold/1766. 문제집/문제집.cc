@@ -17,7 +17,6 @@ void Solve() {
     }
 
     while (!pq.empty()) {
-        vector<int> toErase;
         int curr = pq.top();
         pq.pop();
 
@@ -27,15 +26,9 @@ void Solve() {
             orders[a]--;
 
             if (orders[a] == 0) {
-                toErase.push_back(a);
                 pq.push(a);
             }
         }
-
-        for (const auto& a : toErase) {
-            graph[curr].erase(a);
-        }
-
     }
 }
 
