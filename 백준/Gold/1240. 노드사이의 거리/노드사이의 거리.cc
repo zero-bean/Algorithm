@@ -49,6 +49,9 @@ bool DFS(vector<bool>& InVisited, const int InCurrent, const int& InLast, int& T
 
 int main(void)
 {
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+
 	cin >> N >> M;
 
 	Nodes.resize(N + 1);
@@ -71,7 +74,7 @@ int main(void)
 
 		visited[start] = true;
 		DFS(visited, start, last, totalDist);
-		cout << totalDist << endl;
+		cout << totalDist << "\n";
 	}
 
 	return 0;
