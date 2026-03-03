@@ -16,8 +16,9 @@ public:
 };
 
 vector<vector<Node>> Nodes{};
+vector<bool> Visited{};
 
-bool DFS(vector<bool>& InVisited, const int InCurrent, const int& InLast, int& TotalDist)
+bool DFS(const int InCurrent, const int& InLast, int& TotalDist)
 {
 	if (InCurrent == InLast)
 	{
@@ -28,15 +29,15 @@ bool DFS(vector<bool>& InVisited, const int InCurrent, const int& InLast, int& T
 	for (int i = 0; i < CurrNode.size(); ++i)
 	{
 		int Next = CurrNode[i].Num;
-		if (InVisited[Next] == true)
+		if (Visited[Next] == true)
 		{
 			continue;
 		}
 
-		InVisited[Next] = true;
+		Visited[Next] = true;
 		TotalDist += CurrNode[i].Dist;
 
-		if (DFS(InVisited, Next, InLast, TotalDist))
+		if (DFS(Next, InLast, TotalDist))
 		{
 			return true;
 		}
@@ -55,6 +56,7 @@ int main(void)
 	cin >> N >> M;
 
 	Nodes.resize(N + 1);
+	Visited.resize(N + 1);
 
 	for (int i = 1; i < N; ++i)
 	{
@@ -67,13 +69,13 @@ int main(void)
 
 	for (int i = 0; i < M; ++i)
 	{
-		vector<bool> visited(N + 1, false);
+		fill(Visited.begin(), Visited.end(), false);
 		int start = 0, last = 0, totalDist = 0;
 
 		cin >> start >> last;
 
-		visited[start] = true;
-		DFS(visited, start, last, totalDist);
+		Visited[start] = true;
+		DFS(start, last, totalDist);
 		cout << totalDist << "\n";
 	}
 
