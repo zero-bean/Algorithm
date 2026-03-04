@@ -5,7 +5,7 @@
 using namespace std;
 
 int N = 0, M = 0, Trials = 0;
-vector<int> BrokenBtn{};
+vector<bool> IsBroken{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
 int main(void)
 {
@@ -14,10 +14,11 @@ int main(void)
 
 	cin >> N >> M;
 
-	BrokenBtn.resize(M);
 	for (int i = 0; i < M; ++i)
 	{
-		cin >> BrokenBtn[i];
+		int Num;
+		cin >> Num;
+		IsBroken[Num] = true;
 	}
 
 	Trials = abs(N - 100);
@@ -30,19 +31,12 @@ int main(void)
 		
 		if (i == 0)
 		{
-			for (int j = 0; j < M; ++j)
+			if (IsBroken[0] == true)
 			{
-				if (i == BrokenBtn[j])
-				{
-					isAble = false;
-					break;
-				}
+				continue;
 			}
 
-			if (isAble)
-			{
-				btnCnt = 1;
-			}
+			btnCnt += 1;
 		}
 		else
 		{
@@ -52,13 +46,10 @@ int main(void)
 				tmpChannel /= 10;
 				btnCnt += 1;
 
-				for (int j = 0; j < M; ++j)
+				if (IsBroken[left])
 				{
-					if (left == BrokenBtn[j])
-					{
-						isAble = false;
-						break;
-					}
+					isAble = false;
+					break;
 				}
 			}
 		}
