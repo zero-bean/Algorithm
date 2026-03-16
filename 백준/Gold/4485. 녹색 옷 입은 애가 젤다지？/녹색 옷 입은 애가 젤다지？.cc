@@ -24,7 +24,8 @@ int BFS(const vector<vector<int>>& grid)
 {
 	vector<vector<int>> dp(N, vector<int>(N, numeric_limits<int>::max()));
 	priority_queue<Node, vector<Node>, greater<Node>> q;
-
+	const int cy[4] = { 0,0,-1,1 };
+	const int cx[4] = { 1,-1,0,0 };
 	dp[0][0] = grid[0][0];
 	q.push({ 0,0, grid[0][0]});
 
@@ -33,8 +34,10 @@ int BFS(const vector<vector<int>>& grid)
 		const Node curr = q.top();
 		q.pop();
 
-		const int cy[4] = {0,0,-1,1};
-		const int cx[4] = {1,-1,0,0};
+		if (curr.y == N - 1 && curr.x == N - 1)
+		{
+			return curr.cost;
+		}
 	
 		for (int i = 0; i < 4; ++i)
 		{
