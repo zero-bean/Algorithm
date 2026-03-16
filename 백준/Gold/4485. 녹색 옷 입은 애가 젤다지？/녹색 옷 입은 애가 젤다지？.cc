@@ -7,19 +7,30 @@ using namespace std;
 
 int N;
 
+struct Node
+{
+	Node(const int y, const int x, const int cost) : y(y), x(x), cost(cost) {}
+
+	bool operator>(const Node& other) const { return cost > other.cost; }
+
+	int y = 0;
+	int x = 0;
+	int cost = numeric_limits<int>::max();
+};
+
 bool inline isInRange(const int y, const int x) { return y >= 0 && y < N && x >= 0 && x < N; }
 
 int BFS(const vector<vector<int>>& grid)
 {
 	vector<vector<int>> dp(N, vector<int>(N, numeric_limits<int>::max()));
-	queue<pair<int, int>> q;
+	priority_queue<Node, vector<Node>, greater<Node>> q;
 
 	dp[0][0] = grid[0][0];
-	q.push({ 0,0 });
+	q.push({ 0,0, grid[0][0]});
 
 	while (q.empty() == false)
 	{
-		const pair<int, int> curr = q.front();
+		const Node curr = q.top();
 		q.pop();
 
 		const int cy[4] = {0,0,-1,1};
@@ -27,18 +38,19 @@ int BFS(const vector<vector<int>>& grid)
 	
 		for (int i = 0; i < 4; ++i)
 		{
-			const int ny = curr.first + cy[i];
-			const int nx = curr.second + cx[i];
+			const int ny = curr.y + cy[i];
+			const int nx = curr.x + cx[i];
 
 			if (isInRange(ny, nx) == false)
 			{
 				continue;
 			}
 
-			if (dp[curr.first][curr.second] + grid[ny][nx] < dp[ny][nx])
+			const int tmpCost = dp[curr.y][curr.x] + grid[ny][nx];
+			if (tmpCost < dp[ny][nx])
 			{
-				dp[ny][nx] = dp[curr.first][curr.second] + grid[ny][nx];
-				q.push({ ny, nx });
+				dp[ny][nx] = tmpCost;
+				q.push({ ny, nx, tmpCost });
 			}
 		}
 	}
