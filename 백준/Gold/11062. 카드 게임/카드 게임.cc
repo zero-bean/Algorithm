@@ -11,7 +11,7 @@ int choiceCard(const vector<int>& cards, vector<vector<int>>& score, int left, i
 		return 0;
 	}
 
-	if (score[left][right] != 0)
+	if (score[left][right] != -1)
 	{
 		return score[left][right];
 	}
@@ -40,7 +40,7 @@ int main(void)
 		cin >> n;
 
 		vector<int> cards(n + 1);
-		vector<vector<int>> dp(n + 1, vector<int>(n + 1, 0));
+		vector<vector<int>> dp(n + 1, vector<int>(n + 1, -1));
 
 		for (int i = 1; i <= n; ++i)
 		{
