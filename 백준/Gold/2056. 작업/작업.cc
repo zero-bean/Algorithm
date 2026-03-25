@@ -1,56 +1,59 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <algorithm> 
 
 using namespace std;
 
 struct Node
 {
-	int leftTime = 0;
-	int priority = 0;
-	vector<int> neighbors{};
+	int duration = 0;       // 작업 소요 시간
+	int inDegree = 0;       // 선행 작업 수
+	vector<int> nextNodes;  // 이 작업이 끝나야 시작할 수 있는 다음 작업들
 };
 
-int Solve(vector<Node> nodes)
+int Solve(vector<Node> nodes) 
 {
-	vector<int> consumeTime(nodes.size(), 0);
-	int answer = 0;
-	queue<int> q{};
+	vector<int> startTime(nodes.size(), 0); // 각 작업이 시작할 수 있는 가장 빠른 시간
+	int totalTime = 0;
+	queue<int> q;
 
-	// 초기화
+	// 1. 선행 작업이 없는 노드들을 큐에 삽입
 	for (int i = 1; i < nodes.size(); ++i)
 	{
-		if (nodes[i].priority == 0)
+		if (nodes[i].inDegree == 0)
 		{
 			q.push(i);
 		}
 	}
 
-	while (q.empty() == false)
+	// 2. 위상 정렬
+	while (!q.empty())
 	{
-		const int currIdx = q.front();
+		int currIdx = q.front();
 		q.pop();
 
-		nodes[currIdx].priority = -1;
+		// 현재 작업이 끝나는 시간 계산 및 최종 정답 갱신
+		int currEndTime = startTime[currIdx] + nodes[currIdx].duration;
+		totalTime = max(totalTime, currEndTime);
 
-		for (int i = 0; i < nodes[currIdx].neighbors.size(); ++i)
+		for (int nxtIdx : nodes[currIdx].nextNodes)
 		{
-			const int nxtIdx = nodes[currIdx].neighbors[i];
+			// 다음 작업의 시작 가능 시간 갱신
+			startTime[nxtIdx] = max(startTime[nxtIdx], currEndTime);
 
-			consumeTime[nxtIdx] = max(consumeTime[nxtIdx], consumeTime[currIdx] + nodes[currIdx].leftTime);
-			nodes[nxtIdx].priority -= 1;
+			// 선행 작업이 하나 끝났으므로 진입차수 감소
+			nodes[nxtIdx].inDegree--;
 
-			if (nodes[nxtIdx].priority == 0)
+			// 진입차수가 0이면 큐에 삽입
+			if (nodes[nxtIdx].inDegree == 0)
 			{
 				q.push(nxtIdx);
 			}
-
 		}
-
-		answer = max(answer, consumeTime[currIdx] + nodes[currIdx].leftTime);
 	}
 
-	return answer;
+	return totalTime;
 }
 
 int main(void)
@@ -58,33 +61,30 @@ int main(void)
 	ios::sync_with_stdio(false);
 	cin.tie(NULL);
 
-	vector<Node> nodes{};
 	int N = 0;
-
 	cin >> N;
 
-	nodes.resize(N + 1);
+	vector<Node> nodes(N + 1);
 
 	for (int i = 1; i <= N; ++i)
 	{
-		int consumeTime = 0;
+		int duration = 0;
 		int predecessorCnt = 0;
-		int priority = 0;
-		
-		cin >> consumeTime >> predecessorCnt;
 
-		for (int j = 0, senior = 0; j < predecessorCnt; ++j)
+		cin >> duration >> predecessorCnt;
+
+		for (int j = 0; j < predecessorCnt; ++j)
 		{
+			int senior = 0;
 			cin >> senior;
-			nodes[senior].neighbors.push_back(i);
-			priority = predecessorCnt;
+			nodes[senior].nextNodes.push_back(i);
 		}
 
-		nodes[i].leftTime = consumeTime;
-		nodes[i].priority = priority;
+		nodes[i].duration = duration;
+		nodes[i].inDegree = predecessorCnt;
 	}
 
-	cout << Solve(nodes) << endl;
+	cout << Solve(nodes) << "\n";
 
 	return 0;
 }
