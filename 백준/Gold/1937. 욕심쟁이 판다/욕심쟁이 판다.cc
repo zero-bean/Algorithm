@@ -72,6 +72,9 @@ int Solve()
 
 int main()
 {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
     cin >> N;
 
     History.resize(N, vector<int>(N, 0));
