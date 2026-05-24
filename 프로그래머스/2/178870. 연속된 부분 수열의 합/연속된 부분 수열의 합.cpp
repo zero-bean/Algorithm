@@ -15,16 +15,6 @@ vector<int> solution(vector<int> sequence, int k)
         prefixSum[i] = prefixSum[i-1] + sequence[i-1];
     }
     
-    // 길이가 1인 경우
-    for (int i=0; i<arrSize; ++i)
-    {
-        if (sequence[i] == k)
-        {
-            return vector<int>({i, i});
-        }
-    }
-    
-    // 길이가 n인 경우
     vector<vector<int>> candidates{};
     int left = 0;
     int right = 1;
