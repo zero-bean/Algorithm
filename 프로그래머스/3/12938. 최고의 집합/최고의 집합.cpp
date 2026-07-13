@@ -18,17 +18,15 @@ vector<int> solution(int n, int s)
         answer[i] = mod;
     }
     
-    int idx = 0;
+    int idx = n - 1;
     while (divided > 0)
     {
         answer[idx] += 1;
         divided -= 1;
-        idx++;
+        idx--;
         
-        if (idx >= n) { idx = 0; }
+        if (idx < 0) { idx = n-1; }
     }
-    
-    sort(answer.begin(), answer.end(), less<int>());
     
     return answer;
 }
